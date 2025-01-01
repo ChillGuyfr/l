@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Transformer Pro</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Text Transformer Pro</h1>
+            <p class="subtitle">Advanced text manipulation suite for modern needs</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>Multi-Transform</h3>
+                <p>Multiple text transformation options including character wrapping, l33t speak, and more</p>
+            </div>
+            <div class="feature">
+                <h3>Real-time Processing</h3>
+                <p>Instant transformations with zero delay</p>
+            </div>
+            <div class="feature">
+                <h3>Easy Sharing</h3>
+                <p>One-click copy to clipboard functionality</p>
+            </div>
+        </div>
+
+        <div class="transform-controls">
+            <button class="transform-button active" data-transform="wrap">Character Wrap</button>
+            <button class="transform-button" data-transform="leet">L33t Speak</button>
+            <button class="transform-button" data-transform="mock">MoCkInG</button>
+            <button class="transform-button" data-transform="reverse">Reverse</button>
+        </div>
+
+        <input 
+            type="text" 
+            id="inputField" 
+            placeholder="Enter your text..."
+            class="input-field"
+            autocomplete="off"
+            spellcheck="false"
+        >
+        
+        <div class="output-container">
+            <div id="output" class="output"></div>
+            <button id="copyButton" class="copy-button">
+                Copy
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { wrapText, leetText, mockingText, reverseText } from './src/js/transformers.js';
+        import { copyToClipboard } from './src/js/clipboard.js';
+        
+        const inputField = document.querySelector('#inputField');
+        const output = document.querySelector('#output');
+        const copyButton = document.querySelector('#copyButton');
+        const transformButtons = document.querySelectorAll('.transform-button');
+        
+        let currentTransform = 'wrap';
+        
+        const transforms = {
+            wrap: wrapText,
+            leet: leetText,
+            mock: mockingText,
+            reverse: reverseText
+        };
+
+        function updateOutput() {
+            const text = inputField.value;
+            output.textContent = transforms[currentTransform](text);
+        }
+
+        transformButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                transformButtons.forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                currentTransform = button.dataset.transform;
+                updateOutput();
+            });
+        });
+
+        inputField.addEventListener('input', updateOutput);
+        
+        copyButton.addEventListener('click', () => {
+            copyToClipboard(output.textContent);
+        });
+    </script>
+</body>
+</html>
